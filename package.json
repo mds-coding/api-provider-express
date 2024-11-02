@@ -1,9 +1,9 @@
 {
   "license": "ISC",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "mdos-san",
   "name": "@mds-coding/api",
-  "description": "DatabaseMongo class",
+  "description": "Api implementation",
   "type": "module",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
