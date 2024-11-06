@@ -1,8 +1,9 @@
 import { ApiRoute } from "@mds-coding/api-route";
-import { HttpMethod } from "@mds-coding/http-method";
-import { HttpRequest } from "@mds-coding/http-request";
-import express  from "express";
+import { HttpMethod, HttpRequest } from "@mds-coding/http";
+import express from "express";
 import http from "http";
+
+type ExpressMethod = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
 export class Api {
   app: express.Express;
@@ -21,10 +22,12 @@ export class Api {
   }
 
   addRoute<T, U>(route: ApiRoute<T, U>) {
-    this.app[route.method](route.path, (req, res) => {
+    const expressMethod = route.method.toLowerCase() as ExpressMethod;
+    this.app[expressMethod](route.path, (req, res) => {
       // Convert to HttpRequest
       // TODO headers
-      const httpRequest = new HttpRequest(stringToHttpMethod(req.method), req.path, {}, req.body);
+      const method: HttpMethod = stringToHttpMethod(req.method);
+      const httpRequest = new HttpRequest(method, req.path, {}, req.body);
 
       // Handle
       const httpResponse = route.handler(httpRequest);
@@ -52,23 +55,27 @@ export class Api {
 
 function stringToHttpMethod(str: string): HttpMethod {
   if (str === "GET") {
-    return 'get';
+    return 'GET';
   }
 
   if (str === "POST") {
-    return 'post';
+    return 'POST';
   }
 
   if (str === "PATCH") {
-    return 'patch';
+    return 'PATCH';
   }
 
   if (str === "PUT") {
-    return 'put';
+    return 'PUT';
   }
 
   if (str === "DELETE") {
-    return 'delete';
+    return 'DELETE';
+  }
+
+  if (str === "OPTION") {
+    return 'OPTION';
   }
 
   throw new Error("Does not match an HttpMethod")

@@ -12,10 +12,8 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "dependencies": {
-    "@mds-coding/api-route": "^1.0.0",
-    "@mds-coding/http-method": "^1.0.0",
-    "@mds-coding/http-request": "^1.0.0",
-    "@mds-coding/http-response": "^1.0.0",
+    "@mds-coding/api-route": "^2.0.0",
+    "@mds-coding/http": "^2.0.1",
     "express": "^4.21.1"
   },
   "devDependencies": {
