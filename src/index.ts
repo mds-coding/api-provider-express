@@ -5,7 +5,7 @@ import http from "http";
 
 type ExpressMethod = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
-export class Api {
+export class ApiProviderExpress {
   app: express.Express;
   port: number;
   server: http.Server | null;

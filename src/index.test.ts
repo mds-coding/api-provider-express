@@ -1,15 +1,15 @@
 import supertest from "supertest";
-import { Api } from "./index.js"
+import { ApiProviderExpress } from "./index.js"
 import { ApiRoute } from "@mds-coding/api-route";
 import { HttpResponse } from "@mds-coding/http";
 
-test("`Api` can be created and called", async () => {
+test("`ApiProviderExpress` can be created and called", async () => {
   return new Promise<void>((res, rej) => {
     // Init API
     const route = new ApiRoute<{ hello: number }, { world: number }>('GET', '/foo', (req) => {
       return new HttpResponse(200, "OK", {}, { world: req.body.hello * 2 });
     })
-    const api = new Api(4242);
+    const api = new ApiProviderExpress(4242);
     api.addRoute(route);
 
     // Start API
